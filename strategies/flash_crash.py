@@ -24,7 +24,7 @@ from dataclasses import dataclass
 from typing import Dict
 
 from lib.console import Colors, format_countdown
-from strategies.base import BaseStrategy, StrategyConfig
+from strategies.base import BaseStrategy, StrategyConfig, Position  # ← ADD Position HERE
 from src.bot import TradingBot
 from src.websocket_client import OrderbookSnapshot
 
