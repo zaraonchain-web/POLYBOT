@@ -7,4 +7,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-CMD ["python", "apps/orderbook_tui.py", "--coin", "BTC", "--levels", "5"]
+CMD ["python", "apps/orderbook_tui.py", "--coin", "BTC"]
