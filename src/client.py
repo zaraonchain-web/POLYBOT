@@ -229,19 +229,23 @@ class ClobClient(ApiClient):
     def post_order(self, signed_order: Dict[str, Any], order_type: str = "GTC") -> Dict[str, Any]:
         endpoint = "/order"
 
+        # FIX 4: signer.sign_order() now returns:
+        #   { "order": { ...all fields..., "signature": "0x..." }, "owner": "0x..." }
+        # We just need to add "orderType" and forward it as-is.
+        # The old code was re-wrapping the order and moving the signature to the
+        # top level, which broke the API call.
+        order_obj = signed_order.get("order", signed_order)
+        owner = signed_order.get("owner", self.signer_address if self.signer_address else self.funder)
+
         body = {
-            "order": signed_order.get("order", signed_order),
-            "owner": self.signer_address if self.signer_address else self.funder,
+            "order": order_obj,
+            "owner": owner,
             "orderType": order_type,
         }
-
-        if "signature" in signed_order:
-            body["signature"] = signed_order["signature"]
 
         body_json = json.dumps(body, separators=(',', ':'))
         headers = self._build_headers("POST", endpoint, body_json)
 
-        # DEBUG: log exact payload
         logger.error(f"DEBUG ORDER BODY: {json.dumps(body, indent=2)}")
 
         return self._request("POST", endpoint, data=body, headers=headers)
