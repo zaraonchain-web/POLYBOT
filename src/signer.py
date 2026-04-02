@@ -29,7 +29,7 @@ class Order:
     maker: str
     nonce: Optional[int] = None
     fee_rate_bps: int = 0
-    signature_type: int = 2  # POLY_GNOSIS_SAFE
+    signature_type: int = 1  # POLY_PROXY — email/Magic wallet
 
     def __post_init__(self):
         self.side = self.side.upper()
