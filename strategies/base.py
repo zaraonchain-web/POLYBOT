@@ -53,7 +53,7 @@ class StrategyConfig:
     price_history_size: int = 100
 
     # Display settings
-    update_interval: float = 0.1
+    update_interval: float = 1.0
     order_refresh_interval: float = 30.0  # Seconds between order refreshes
 
 
