@@ -22,9 +22,9 @@ from src.websocket_client import OrderbookSnapshot
 class FlashCrashConfig(StrategyConfig):
     """Snapback strategy configuration."""
 
-    entry_threshold: float = 0.22   # Buy when price drops to this or below
+    entry_threshold: float = 0.37   # Buy when price drops to this or below
     take_profit: float = 0.10       # Take profit at +0.10
-    stop_loss: float = 0.04         # Stop loss at -0.04
+    stop_loss: float = 0.03         # Stop loss at -0.04
     min_countdown_mins: int = 3     # Block entries in last 3 minutes
 
 
